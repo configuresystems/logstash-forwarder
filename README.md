@@ -11,9 +11,9 @@ with ELK or Logstash environments.
 
 - Installs logstash-forwarder
 - Sends Log Files
--- /var/log/auth.log
--- /var/log/syslog
--- /var/log/apache2/other_vhosts_access.log
+  - /var/log/auth.log
+  - /var/log/syslog
+  - /var/log/apache2/other_vhosts_access.log
 
 You can modify the template to include other files: 
 `roles/logstash-forwarder/templates/logstash-forwarder.logger.j2`
@@ -23,9 +23,9 @@ You can modify the template to include other files:
 To use this role, just update the default values in:
 `roles/logstash-forwarder/defaults/main.yml`
 
-`logstash_hostname` is the hostname of your logstash server
-`logstash_port` is the port that your logstash server listens on
-`logstash_ip` is the actual IP address of where your `logstash_hostname`
+- `logstash_hostname` is the hostname of your logstash server.
+- `logstash_port` is the port that your logstash server listens on
+- `logstash_ip` is the actual IP address of where your `logstash_hostname`
 should point to
 
 You will also need an SSL certificate.  This is due to lumberjack transmitting
