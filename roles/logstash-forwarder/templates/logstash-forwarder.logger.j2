@@ -1,0 +1,22 @@
+{
+  "network": {
+    "servers": [ "{{ logstash_hostname }}:{{ logstash_port }}" ],
+    "timeout": 15,
+    "ssl ca": "/etc/pki/tls/certs/logstash-forwarder.crt"
+  },
+  "files": [
+    {
+      "paths": [
+        "/var/log/apache2/other_vhosts_access.log"
+       ],
+      "fields": { "type": "apache-access" }
+    },
+    {
+      "paths": [
+        "/var/log/syslog",
+        "/var/log/auth.log"
+       ],
+      "fields": { "type": "syslog" }
+    }
+   ]
+}

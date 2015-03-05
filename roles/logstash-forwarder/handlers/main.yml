@@ -1,0 +1,6 @@
+---
+
+- name: start logstash-forwarder
+  service: name=logstash-forwarder
+           state=started
+  sudo: yes

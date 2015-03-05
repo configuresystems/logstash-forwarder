@@ -1,0 +1,67 @@
+---
+
+- name: create logstash user
+  user: name=logstash
+        comment="logstash-forwarder for ELK"
+        shell=/bin/nologin
+        group=adm
+  sudo: yes
+
+- name: create logstash directories
+  file: path={{ item }}
+        state=directory
+        owner=logstash
+        group=adm
+        mode=0755
+  with_items:
+    - /var/lib/logstash-forwarder
+    - /var/log/logstash-forwarder
+  sudo: yes
+        
+- name: create ssl directory
+  file: path=/etc/pki/tls/certs
+        state=directory
+        owner=root
+        group=root
+  sudo: yes
+
+- name: copy init file
+  template: src=logstash-forwarder.init.j2
+            dest=/etc/init.d/logstash-forwarder
+            mode=0755
+  sudo: yes
+
+- name: copy init conf file
+  template: src=logstash-forwarder.init.conf.j2
+            dest=/etc/init/logstash-forwarder.conf
+            mode=0644
+  sudo: yes
+
+- name: copy default conf file
+  template: src=logstash-forwarder.default.conf.j2
+            dest=/etc/default/logstash-forwarder
+            mode=0755
+  sudo: yes
+
+- name: copy ssl certifcate
+  copy: src=logstash-forwarder.crt
+        dest=/etc/pki/tls/certs
+  sudo: yes
+
+- name: update hosts file
+  lineinfile: dest=/etc/hosts
+              line="{{ logstash_ip }} {{ logstash_hostname }}"
+              mode=0644
+  sudo: yes
+
+- name: copy logger confs
+  template: src=logstash-forwarder.logger.j2
+            dest=/etc/logstash-forwarder
+  sudo: yes
+
+- name: untar logstash-forwarder
+  unarchive: src=logstash-forwarder.tar.gz
+             dest=/opt
+  sudo: yes
+  notify: start logstash-forwarder
+

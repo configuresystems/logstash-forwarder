@@ -1,0 +1,6 @@
+---
+
+- hosts: {{ hostname }}
+  user: {{ user }}
+  roles:
+    - logstash-forwarder

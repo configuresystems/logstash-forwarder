@@ -1,0 +1,5 @@
+---
+
+logstash_ip: 192.168.10.10
+logstash_port: 5000
+logstash_hostname: logstash.example.com
