@@ -11,9 +11,9 @@ with ELK or Logstash environments.
 
 - Installs logstash-forwarder
 - Sends Log Files
-- - /var/log/auth.log
-- - /var/log/syslog
-- - /var/log/apache2/other_vhosts_access.log
+-- /var/log/auth.log
+-- /var/log/syslog
+-- /var/log/apache2/other_vhosts_access.log
 
 You can modify the template to include other files: 
 `roles/logstash-forwarder/templates/logstash-forwarder.logger.j2`
