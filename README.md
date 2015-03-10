@@ -1,6 +1,8 @@
 # Logstash Forwarder
 ====================
 
+[![Build Status](https://travis-ci.org/configuresystems/logstash-forwarder.svg)](https://travis-ci.org/configuresystems/logstash-forwarder)
+
 ### Description
 
 This is an Ansible role to deploy a 'logstash-forwarder' to any machines that
